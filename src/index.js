@@ -2,16 +2,23 @@ import express from "express";
 import authRoutes from "./routes/auth.js"
 import userRoutes from "./routes/users.js"
 import postRoutes from "./routes/posts.js"
+import dotenv from "dotenv";
+import cors from "cors";
 
+dotenv.config()
 
 const app = express()
-require('dotenv').config();
+app.use(cors())
+
+if (!process.env.PORT) {
+    console.log("La variable de entorno PORT no se ha configurado.");
+}
 
 app.use(express.json())
 app.use("/api/auth", authRoutes)
 app.use("/api/users", userRoutes)
 app.use("/api/posts", postRoutes)
 
-app.listen(8800, () => {
-    console.log("Connected!")
+app.listen(process.env.PORT, () => {
+    console.log(`Servidor en ejecución en el puerto ${process.env.PORT}`)
 })
