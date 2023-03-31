@@ -5,6 +5,21 @@ export const register = async (req, res) => {
 
     try {
         const { username, email, password } = req.body;
+    
+        const q = await prisma.users.findMany({
+            where: {
+                OR: [
+                    { username: username},
+                    { email: email}
+                ]
+            }
+        })
+
+        if (q.length) {
+            return res.status(409).json(
+                `Username y email ya existen`
+            )
+        }
 
         const hash = await bcrypt.hash(password, 13);
 
