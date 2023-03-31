@@ -4,6 +4,7 @@ import userRoutes from "./routes/users.js"
 import postRoutes from "./routes/posts.js"
 import dotenv from "dotenv";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 dotenv.config()
 
@@ -15,6 +16,7 @@ if (!process.env.PORT) {
 }
 
 app.use(express.json())
+app.use(cookieParser())
 app.use("/api/auth", authRoutes)
 app.use("/api/users", userRoutes)
 app.use("/api/posts", postRoutes)
