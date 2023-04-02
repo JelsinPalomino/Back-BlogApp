@@ -82,7 +82,7 @@ export const login = async (req, res) => {
         /* res.status(201).json({username, token}) */
 
         res
-            .cookie("access_token", token, {
+            .cookie("front-token", token, {
             httpOnly: true
             })
             .status(200)

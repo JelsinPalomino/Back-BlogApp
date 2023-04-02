@@ -9,14 +9,14 @@ import cookieParser from "cookie-parser";
 dotenv.config()
 
 const app = express()
+app.use(express.json())
+app.use(cookieParser())
 app.use(cors())
 
 if (!process.env.PORT) {
     console.log("La variable de entorno PORT no se ha configurado.");
 }
 
-app.use(express.json())
-app.use(cookieParser())
 app.use("/api/auth", authRoutes)
 app.use("/api/users", userRoutes)
 app.use("/api/posts", postRoutes)
