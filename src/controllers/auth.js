@@ -79,14 +79,8 @@ export const login = async (req, res) => {
             {
                 expiresIn: "4h"
             });
-        /* res.status(201).json({username, token}) */
 
-        res
-            .cookie("front-token", token, {
-            httpOnly: true
-            })
-            .status(200)
-            .json(username)
+        res.status(201).json({username, token})
 
     } catch (err) {
         res.status(500).json({
