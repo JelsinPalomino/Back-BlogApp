@@ -62,6 +62,8 @@ export const login = async (req, res) => {
              },
         })
 
+        /* console.log(usuario) */
+
         if (!usuario) {
             res.status(401).json({ message: `Usuario equivocado` });
             return
@@ -80,7 +82,13 @@ export const login = async (req, res) => {
                 expiresIn: "4h"
             });
 
-        res.status(201).json({username, token})
+        res.status(201).json({
+            id: usuario.id,
+            username, 
+            email: usuario.email,
+            imagen: usuario.img,
+            token
+        })
 
     } catch (err) {
         res.status(500).json({
@@ -93,3 +101,4 @@ export const login = async (req, res) => {
 export const logout = (req, res) => {
 
 }
+
